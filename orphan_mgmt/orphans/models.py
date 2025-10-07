@@ -22,4 +22,28 @@ class Course(models.Model):
    
    def __str__(self):
        return self.title 
+
+# Goal model    
+class Goal(models.Model):
+    """Each Orphan's personal goal"""
+    orphan = models.OneToOneField(Orphan, on_delete=models.CASCADE, related_name='goal')
+    description = models.TextField()
+    is_achieved = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.orphan.name}'s goal"
+    
+class Enrollment(models.Model):
+    """Link between Orphan and Course"""
+    orphan = models.ForeignKey(Orphan, on_delete=models.CASCADE, related_name='enrollments')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    progress = models.IntegerField(default=0) # progress percentage
+    enrolled_on = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('orphan', 'course') # prevent double enrollement
+        
+    def __str__(self):
+        return f"{self.orphan.name} enrolled in {self.course.title}"
     
