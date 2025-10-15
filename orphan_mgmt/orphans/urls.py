@@ -1,12 +1,21 @@
 from django.urls import path
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import (
     OrphanListCreateView, CourseListCreateView,
     OrphanDetailView, CourseDetailview,
     GoalCreateView, EnrollmentListCreateView,
-    GoalDetailView, EnrollmentDetailView
+    GoalDetailView, EnrollmentDetailView,
+    RegisterView, LogoutView
 )
 
 urlpatterns = [
+    
+    #Auth
+    path('auth/register/', RegisterView.as_view(), name='register'),
+    path('auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('auth/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('auth/logout/', LogoutView.as_view(), name='logout'),
+    
     # Orphan endpoints
     path('orphans/', OrphanListCreateView.as_view(), name='orphan-list-create'),
     path('orphans/<int:pk>/', OrphanDetailView.as_view(), name='orphan-detail'),

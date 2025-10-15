@@ -13,23 +13,29 @@ This project is part of my **Backend Development training**.
   - Create, update, delete, and list orphans
 - **Courses**
   - Create, update, delete, and list courses
-- **Goals** (coming soon)
+- **Goals** 
   - Set and track goals for each orphan
-- **Enrollments** (coming soon)
+- **Enrollments** 
   - Enroll orphans in courses and track progress
-- **Authentication** (optional, future)
+- **Authentication** 
   - Register and login for admin/trainers
 
 ## 📂 Project Structure
 
 orphan_mgmt/
-├── orphan_mgmt/ # Main Django project
-├── orphans/ # App handling orphans, courses, goals, enrollments
-│ ├── models.py # Database models
-│ ├── serializers.py # Convert models <-> JSON
-│ ├── views.py # API endpoints logic
-│ ├── urls.py # App routes
-│ └── ...
+├── orphan_mgmt/              # Main Django project settings
+├── orphans/                  # App handling orphans, courses, goals, enrollments
+│   ├── migrations/
+│   ├── models.py
+│   ├── views.py
+│   ├── serializers.py
+│   ├── urls.py
+│   └── renderers.py
+├── templates/
+│   └── home.html             # Simple homepage
+├── manage.py
+├── requirements.txt
+└── README.md
 
 ## 🔑 API Endpoints
 
@@ -61,3 +67,49 @@ orphan_mgmt/
 - `GET /api/enrollments/1/` → get details of enrollment
 - `PUT /api/enrollments/1/` → update progress
 - `DELETE /api/enrollments/1/` → remove orphan from course
+
+### Authentication
+
+- `POST /api/auth/register/` → Register User
+- `POST /api/auth/login/` → Login and get JWT token
+- `POST /api/auth/logout/` → Logout user
+
+### Browsable API Access
+
+- Visit: http://127.0.0.1:8000/ → Homepage
+- Visit: http://127.0.0.1:8000/api/orphans/ → API view
+- Login via Django Admin: http://127.0.0.1:8000/admin/
+
+### ERD Diagram (Database Design)
+
+Entities:
+
+- Orphan (id, name, age, nationality)
+- Course (id, title, description)
+- Goal (id, description, status, orphan_id)
+- Enrollment (id, orphan_id, course_id, progress)
+
+Relationships:
+
+- One Orphan → Many Goals
+- Many Orphans ↔ Many Courses (through Enrollments)
+
+### Future Improvements
+
+- Add a frontend dashboard (React or Django Templates)
+- Implement role-based access (Admin / Trainer)
+- Generate PDF progress reports
+- Deploy API to Render or PythonAnywhere
+
+### Author
+
+👤 Francois Etsevi
+
+- Backend Developer (ALX Africa Trainee)
+
+- Networking Engineer at IPMC Ghana
+
+- Passionate about training orphans to achieve their goals through IT and education
+
+📧 Email: etsevifrancois@gmail.com
+🔗 GitHub: https://github.com/fetsevi

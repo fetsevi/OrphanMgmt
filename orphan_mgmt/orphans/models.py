@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 # Orphans model 
@@ -47,3 +48,16 @@ class Enrollment(models.Model):
     def __str__(self):
         return f"{self.orphan.name} enrolled in {self.course.title}"
     
+# Customer User
+
+class User(AbstractUser):
+    """Custom User model with role field"""
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('trainer', 'Trainer'),
+    )
+    
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='Trainer')
+    
+    def __str__(self):
+        return f"{self.username} ({self.role})"
