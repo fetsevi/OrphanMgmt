@@ -106,9 +106,7 @@ Relationships:
 👤 Francois Etsevi
 
 - Backend Developer (ALX Africa Trainee)
-
 - Networking Engineer at IPMC Ghana
-
 - Passionate about training orphans to achieve their goals through IT and education
 
 📧 Email: etsevifrancois@gmail.com

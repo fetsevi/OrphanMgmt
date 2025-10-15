@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from .models import Orphan, Course, Goal, Enrollment
-from .serializers import OrphanSerializer, CourseSerializer, GoalSerializer, EnrollmentSerializer, RegisterSerializer
+from .serializers import OrphanSerializer, CourseSerializer, GoalSerializer, EnrollmentSerializer, RegisterSerializer, LogoutSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -80,6 +80,7 @@ class RegisterView(generics.CreateAPIView):
     
 class LogoutView(generics.GenericAPIView):
     """Logout by blacklisting the refresh token"""
+    serializer_class = LogoutSerializer
     permission_classes=[permissions.IsAuthenticated]
     
     def post(self, request):
